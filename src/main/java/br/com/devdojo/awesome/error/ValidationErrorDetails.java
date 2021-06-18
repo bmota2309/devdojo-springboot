@@ -2,10 +2,14 @@ package br.com.devdojo.awesome.error;
 
 import javax.annotation.Generated;
 
-public class ResourceNotFoundDetails extends ErrorDetail{
-
+public class ValidationErrorDetails extends ErrorDetail {
+	private String field;
+	private String fieldMessage;
+	
 	@Generated("SparkTools")
-	private ResourceNotFoundDetails(Builder builder) {
+	private ValidationErrorDetails(Builder builder) {
+		this.setField(builder.field);
+		this.setFieldMessage(builder.fieldMessage);
 		this.setTitle(builder.title);
 		this.setStatus(builder.status);
 		this.setDetail(builder.detail);
@@ -13,12 +17,12 @@ public class ResourceNotFoundDetails extends ErrorDetail{
 		this.setDeveloperMessage(builder.developerMessage);
 	}
 
-	private ResourceNotFoundDetails() {
+	private ValidationErrorDetails() {
 
 	}
 
 	/**
-	 * Creates builder to build {@link ResourceNotFoundDetails}.
+	 * Creates builder to build {@link ValidationErrorDetails}.
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -26,11 +30,29 @@ public class ResourceNotFoundDetails extends ErrorDetail{
 		return new Builder();
 	}
 
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	public String getFieldMessage() {
+		return fieldMessage;
+	}
+
+	public void setFieldMessage(String fieldMessage) {
+		this.fieldMessage = fieldMessage;
+	}
+
 	/**
-	 * Builder to build {@link ResourceNotFoundDetails}.
+	 * Builder to build {@link ValidationErrorDetails}.
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
+		private String field;
+		private String fieldMessage;
 		private String title;
 		private int status;
 		private String detail;
@@ -42,6 +64,16 @@ public class ResourceNotFoundDetails extends ErrorDetail{
 
 		public Builder withTitle(String title) {
 			this.title = title;
+			return this;
+		}
+		
+		public Builder withField(String field) {
+			this.field = field;
+			return this;
+		}
+		
+		public Builder withFieldMessage(String fieldMessage) {
+			this.fieldMessage = fieldMessage;
 			return this;
 		}
 
@@ -65,8 +97,8 @@ public class ResourceNotFoundDetails extends ErrorDetail{
 			return this;
 		}
 
-		public ResourceNotFoundDetails build() {
-			return new ResourceNotFoundDetails(this);
+		public ValidationErrorDetails build() {
+			return new ValidationErrorDetails(this);
 		}
 	}
 

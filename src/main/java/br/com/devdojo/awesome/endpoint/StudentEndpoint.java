@@ -1,6 +1,6 @@
 package br.com.devdojo.awesome.endpoint;
 
-import java.util.Optional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.devdojo.awesome.error.CustomErrorType;
 import br.com.devdojo.awesome.error.ResourceNotFoundException;
 import br.com.devdojo.awesome.model.Student;
 import br.com.devdojo.awesome.repository.StudentRepository;
@@ -50,13 +49,14 @@ public class StudentEndpoint {
 	
 	@PostMapping
 	@Transactional(rollbackFor = Exception.class) // Para tratar exception Checked Ou Retirar o rollback para excepetion Unchecked
-	public ResponseEntity<?> save(@RequestBody Student student){
+	public ResponseEntity<?> save(@Valid @RequestBody Student student){
 		studentDAO.save(student);
 		student.setId(null);
 		studentDAO.save(student);
-		if(true)
-			throw new RuntimeException("Test Transaction");
-		studentDAO.save(student);
+		/*
+		 * if(true) throw new RuntimeException("Test Transaction");
+		 * studentDAO.save(student);
+		 */
 		return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
 	}
 	
